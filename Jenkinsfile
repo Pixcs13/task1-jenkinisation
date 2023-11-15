@@ -22,7 +22,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                ssh jenkins@adam-deploy <<EOF
+                ssh jenkins@maria-deploy <<EOF
                 docker network rm task1-net && echo "removed network" || echo "network already removed"
                 docker network create task1-net
                 docker stop nginx && echo "Stopped nginx" || echo "nginx not running"
