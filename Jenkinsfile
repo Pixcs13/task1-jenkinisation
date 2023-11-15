@@ -20,8 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                docker stop myapp
-                docker rm myapp
+
                 docker run -d -p 80:5500 --name myapp pixcs13/myapp
                 '''
             }
