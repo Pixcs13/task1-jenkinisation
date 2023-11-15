@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                docker build -t pixcs13/task1jenk .
+                docker build -t pixcs13/myapp .
                 '''
             }
 
@@ -12,7 +12,7 @@ pipeline {
         stage('Push') {
             steps {
                 sh '''
-                docker push pixcs13/task1jenk
+                docker push pixcs13/myapp
                 '''
             }
 
@@ -22,7 +22,7 @@ pipeline {
                 sh '''
                 docker stop task1
                 docker rm task1
-                docker run -d -p 80:5500 --name task1 pixcs13/task1jenk
+                docker run -d -p 80:5500 --name task1 pixcs13/myapp
                 '''
             }
 
