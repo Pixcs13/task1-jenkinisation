@@ -26,14 +26,22 @@ pipeline {
             steps {
                 sh '''
                 ssh jenkins@maria-deploy <<EOF
+                docker pull pixcs13/task1jenk
+                docker pull pixcs13/task1-nginx
                 export YOUR_NAME=${YOUR_NAME}
                 docker network rm task1-net && echo "removed network" || echo "network already removed"
                 docker network create task1-net
                 docker stop nginx && echo "Stopped nginx" || echo "nginx not running"
                 docker rm nginx && echo "removed nginx" || echo "nginx does not exist"
-                docker stop flask-app && echo "Stopped flask-app" || echo "flask-app not running"
-                docker rm flask-app && echo "removed flask-app" || echo "flask-app does not exist"
-                docker run -d --name flask-app --network task1-net -e YOUR_NAME=${YOUR_NAME} pixcs13/task1jenk
+                for i in (1:3); do
+                docker stop flask-app-${i} && echo "Stopped flask-app" || echo "flask-app not running"
+                done
+                for i in (1,3);do
+                docker rm flask-app-${i} && echo "removed flask-app" || echo "flask-app does not exist"
+                done
+                for i in (1,3);do
+                docker run -d --name flask-app-${i} --network task1-net -e YOUR_NAME=${YOUR_NAME} pixcs13/task1jenk
+                done
                 docker run -d --name nginx --network task1-net -p 80:80 pixcs13/task1-nginx
                 '''
             }
