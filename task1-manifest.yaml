@@ -6,13 +6,11 @@ metadata:
     app: task1-app
 spec:
   containers:
-  - name: task1
-    image: pixcs13/task1jenk:latest 
-    ports: 
-    - containerPort: 5500
+  - image: pixcs13/task1jenk
+    name: task1
     env:
-    - name: YOUR_NAME
-      value: QA-Kubernetes
+      - name: YOUR_NAME
+        value: QA-Kubernetes
 ---
 apiVersion: v1
 kind: Service
@@ -25,5 +23,5 @@ spec:
   selector:
     app: task1-app
   ports:
-  - protocol: TCP
-    port: 5500
+    - port: 5500
+      protocol: TCP
