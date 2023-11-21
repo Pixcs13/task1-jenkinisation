@@ -17,14 +17,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: task1-service
+  name: flask-app
   labels:
     app: task1-app
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: task1-app
   ports:
   - protocol: TCP
-    port: 80
-    targetPort: 5500
+    port: 5500
