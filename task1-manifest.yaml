@@ -10,10 +10,10 @@ spec:
     name: task1
     env:
       - name: YOUR_NAME
-       valueFrom:
-         secretKeyRef:
-           name: db-root-password
-           key: password
+        valueFrom:
+          secretKeyRef:
+            name: db-root-password
+            key: password
 ---
 apiVersion: v1
 kind: Service
